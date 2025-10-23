@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <!-- Hero Section -->
+    <div class="text-center">
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
+            Welcome to Mini LMS
+        </h1>
+        <p class="mt-5 max-w-xl mx-auto text-xl text-gray-500">
+            Learn new skills with our comprehensive online courses
+        </p>
+        <div class="mt-10">
+            <a hx-get="{% url 'course_list' %}" 
+               hx-target="#main-content"
+               hx-push-url="{% url 'course_list' %}"
+               class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 cursor-pointer">
+                Browse Courses
+            </a>
+        </div>
+    </div>
+
+    <!-- Featured Courses -->
+    <div class="mt-20">
+        <h2 class="text-3xl font-extrabold text-gray-900">Featured Courses</h2>
+        <div class="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+             hx-trigger="load"
+             hx-get="{% url 'course_partial' %}"
+             hx-target="this">
+            <!-- Courses will be loaded via HTMX -->
+            <div class="text-center py-8">
+                <div class="animate-pulse">
+                    <div class="h-4 bg-gray-200 rounded w-3/4 mx-auto mb-2"></div>
+                    <div class="h-3 bg-gray-200 rounded w-1/2 mx-auto"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
